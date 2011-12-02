@@ -54,7 +54,7 @@ class Finn
 my Czech $milan = Czech.new( name => 'Milan' );
 $milan.greet();
 my Finn $merja = Finn.new( name => 'Merja' );
-$merja.greet();                               # but they don't hurt
+$merja.greet();
 
 $merja.report;
 $merja.pays(10);
