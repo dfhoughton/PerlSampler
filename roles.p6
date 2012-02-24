@@ -63,7 +63,12 @@ $merja.pays(10);
 $milan.report;
 try {
    $milan.pays(10);
-   CATCH { say 'oops! not enough latinum' }
+   CATCH {
+      # is this the exception we were expecting?
+      # (yes, if you're expecting it, it should be an exception)
+      when /type\ check\ failed/ { say 'busted!' }
+      default                    { say 'well, I didn\'t see that coming!' }
+   }
 }
 
 $milan.report;
