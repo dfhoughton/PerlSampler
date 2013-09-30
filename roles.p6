@@ -9,7 +9,7 @@ role Named {
 
 role Greeting[Str $greeting] {
    method greet {
-      say $greeting.ucfirst 
+      say $greeting.tc 
          ~ "! I'm "
          ~ ( defined $.name ?? $.name !! 'nameless' )
          ~ '!';
@@ -17,7 +17,7 @@ role Greeting[Str $greeting] {
 }
 
 role Curse[Str $expletive = '@#$%@#'] {
-   method curse () { say $expletive.ucfirst ~ '!!!' }
+   method curse () { say $expletive.tc ~ '!!!' }
 }
 
 role KeepAccount[Numeric $baseline = 0] does Named {
@@ -66,7 +66,7 @@ try {
    CATCH {
       # is this the exception we were expecting?
       # (yes, if you're expecting it, it should be an exception)
-      when /type\ check\ failed/ { say 'busted!' }
+      when /type check failed/ { say 'busted!' }
       default                    { say 'well, I didn\'t see that coming!' }
    }
 }
