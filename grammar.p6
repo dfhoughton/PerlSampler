@@ -31,7 +31,10 @@ my $xml = q{
 
 my $parse = XML.parse($xml);
 if $parse {
-   say 'matched';
+   say "parse: $parse";
+   say "class: $parse.^name()";
+   say "methods: { $parse.^methods.map( *.gist ) }";
+   say "ast: { $parse.ast.gist }";
 } else {
    say 'invalid';
 }
