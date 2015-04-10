@@ -7,27 +7,26 @@ role Named {
   has Str $.name is rw;
 }
 
-role Greeting[Str $greeting] {
+role Greeting[ Str $greeting ] {
    method greet {
-      say $greeting.tc 
-         ~ "! I'm "
-         ~ ( defined $.name ?? $.name !! 'nameless' )
-         ~ '!';
+      say "$greeting.tc()! I'm { $.name // 'nameless' }!";
    }
 }
 
-role Curse[Str $expletive = '@#$%@#'] {
+role Curse[ Str $expletive = '@#$%@#' ] {
    method curse () { say $expletive.tc ~ '!!!' }
 }
 
-role KeepAccount[Numeric $baseline = 0] does Named {
+role KeepAccount[ Numeric $baseline = 0 ] does Named {
+
    has Numeric $!account = $baseline;
+
    method report () { say "$.name has $!account bars of latinum" }
-   method paid(Numeric $amt) {
+   method paid( Numeric $amt ) {
       say "$.name is paid $amt";
       $!account += $amt;
    }
-   method pays(Numeric $amt where { $amt <= $!account }) {
+   method pays( Numeric $amt where * <= $!account ) {
       say "$.name pays $amt";
       $!account -= $amt;
       $.curse if $!account < 20;
