@@ -3,36 +3,26 @@ use v6;
 
 my @ar = <bar baz qux foo>;
 my $any = any( @ar );
-say 'any: ', $any;
 my $all = all( @ar );
-say 'all: ', $all;
-say sprintf "'foo' eq any: %s", ( 'foo' eq $any ?? 'true' !! 'false' );
-say sprintf "'foo' eq all: %s", ( 'foo' eq $all ?? 'true' !! 'false' );
-say '';
+say "'foo' eq $any: {'foo' ~~ $any}";
+say "'foo' eq $all: {'foo' ~~ $all}\n";
 
 my $funky_any = any( $any, $all );
 say 'funy any: ', $funky_any;
 my $funky_all = all( $any, $all );
 say 'funky all: ', $funky_all;
-say sprintf "'foo' eq funky any: %s", ( 'foo' eq $funky_any ?? 'true' !! 'false' );
-say sprintf "'foo' eq funky all: %s", ( 'foo' eq $funky_all ?? 'true' !! 'false' );
-say '';
+say "'foo' eq $funky_any: { 'foo' ~~ $funky_any }";
+say "'foo' eq $funky_all: { 'foo' ~~ $funky_all }\n";
 
 $any = any( 1 .. 10 );
-say 'any: ', $any;
 $all = all( 1 .. 10 );
-say 'all: ', $all;
-say sprintf "5 < any: %s", ( 5 < $any ?? 'true' !! 'false' );
-say sprintf "5 < all: %s", ( 5 < $all ?? 'true' !! 'false' );
-say '';
+say "5 < $any: { !!( 5 < $any ) }";
+say "5 < $all: { !!( 5 < $all ) }\n";
 
- $funky_any = any( $any, $all );
-say 'funky any: ', $funky_any;
- $funky_all = all( $any, $all );
-say 'funky all: ', $funky_all;
-say sprintf "5 < funky any: %s", ( 5 < $funky_any ?? 'true' !! 'false' );
-say sprintf "5 < funky all: %s", ( 5 < $funky_all ?? 'true' !! 'false' );
-say '';
+$funky_any = any( $any, $all );
+$funky_all = all( $any, $all );
+say "5 < $funky_any: { !!( 5 < $funky_any ) }";
+say "5 < $funky_all: { !!( 5 < $funky_all ) }\n";
 
 my $bar = sub ($n) { $n % 2 };
 my $baz = sub ($n) { $n < 2 };
@@ -44,14 +34,13 @@ $all = all( $bar, $baz, $qux, $foo );
 
 my $val = 1;
 say $val;
-say sprintf "any test: %s",  ( $any($val) ?? 'true' !! 'false' );
-say sprintf "all tests: %s", ( $all($val) ?? 'true' !! 'false' );
-say '';
+say sprintf "$any test: { !!$any($val) }";
+say sprintf "$all tests: { !!$all($val) }\n";
 
 $val = any( 1, 2 );
 say $val;
-say sprintf "any test: %s",  ( $any($val) ?? 'true' !! 'false' );
-say sprintf "all tests: %s", ( $all($val) ?? 'true' !! 'false' );
+say sprintf "$any test: { !!$any($val) }";
+say sprintf "$all tests: { !!$all($val) }\n";
 
 say "\nsugar!";
 $val = 1|2;
